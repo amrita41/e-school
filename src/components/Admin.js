@@ -9,6 +9,11 @@ function Admin() {
           <a href="#" className="brand-logo" style={{ fontSize: "25px" }}>
             XYZ School (Admin Panel)
           </a>
+          <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <li>
+              <a href="/">LogOut</a>
+            </li>
+          </ul>
         </div>
       </nav>
       <div className="three-cards">
@@ -31,6 +36,11 @@ function Admin() {
           </div>
         </Link>
       </div>
+      <br />
+      <br />
+      {/* <div className="admin-announcement">
+        <input type="text" placeholder="Make an announcement"></input>
+      </div> */}
     </div>
   );
 }

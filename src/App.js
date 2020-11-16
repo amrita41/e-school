@@ -1,21 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import M from "materialize-css";
+import axios from "axios";
 
 function App() {
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
+  const [list, setList] = useState([]);
   const history = useHistory();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/student")
+      .then((res) => {
+        console.log(res);
+        setList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const login = () => {
-    if (name == "admin" && pass == "password") {
+    {
+      list.map(
+        (row) =>
+          name ==
+            row.name.split(" ")[0] + "-" + row.standard + "-" + row.rollNo &&
+          pass ==
+            row.name.split(" ")[0] + "-" + row.standard + "-" + row.rollNo &&
+          history.push("/student-home/" + name)
+      );
+    }
+    if (name == "" || pass == "") {
+      M.toast({
+        html: "Please fill all the details",
+        classes: "#f44336 red",
+      });
+    } else if (name == "admin" && pass == "password") {
       history.push("/admin");
       M.toast({
         html: "Login successful as an admin!!",
         classes: "#00bcd4 cyan",
       });
-    } else M.toast({ html: "Invalid credentials", classes: "#f44336 red" });
+    } else if (name == "123456" && pass == "123456") {
+      history.push("/teacher-home/" + name);
+      M.toast({
+        html: "Login successful as a teacher!!",
+        classes: "#00bcd4 cyan",
+      });
+    }
   };
+
   return (
     <div className="App">
       <div className="mycard">

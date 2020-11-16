@@ -1,5 +1,6 @@
 * {
   font-family: "Roboto", sans-serif !important;
+  /* background-color: black; */
 }
 .mycard {
   margin-top: 50px;
@@ -32,6 +33,7 @@
   text-align: center;
   margin: 10px auto;
   max-width: 800px;
+  /* background-color: black; */
 }
 
 /* .flex-container {
@@ -43,11 +45,38 @@
   height: 200px;
   margin: 20px;
   padding: 15px;
-  /* background-color: aqua;
+  /* background-color: black;
   color: white; */
 }
 
 .button-class {
   width: 350px;
   margin: 5px;
+}
+
+.admin-announcement {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 100px;
+}
+
+.profile-image {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+p {
+  font-size: 20px;
+  padding: 10px;
+  /* color: white; */
+}
+
+.header {
+  margin: 30px;
+  padding: 20px;
+}
+
+.header-button {
+  padding: 10px;
+  margin-right: 30px;
 }

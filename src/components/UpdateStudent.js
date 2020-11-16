@@ -1,14 +1,14 @@
-import React, { useState, useEfect } from "react";
+import React, { useState, useEffect } from "react";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import M from "materialize-css";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,28 +22,53 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddTeacher() {
+function UpdateStudent() {
+  const { id } = useParams();
   const history = useHistory();
   const classes = useStyles();
   const [name, setName] = useState("");
-  const [employeeId, setEmployeeId] = useState("");
+  const [reg, setReg] = useState("");
   const [email, setEmail] = useState("");
-  const [dob, setDob] = useState("2020-11-16");
   const [gender, setGender] = useState("");
-  const [designation, setDesignation] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [standard, setStandard] = useState();
+  const [roll, setRoll] = useState();
+  const [mob, setMob] = useState("");
+  const [date, setDate] = useState("2020-11-16");
+
+  useEffect(() => {
+    getStudentById();
+  }, []);
+
+  const getStudentById = () => {
+    axios
+      .get("http://localhost:3001/api/student/" + id)
+      .then((res) => {
+        setName(res.data.name);
+        setReg(res.data.regNo);
+        setEmail(res.data.email);
+        setGender(res.data.gender);
+        setStandard(res.data.standard);
+        setRoll(res.data.rollNo);
+        setMob(res.data.mobileNo);
+        setDate(res.data.dob);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
-    e.preventDefault();
     axios
-      .post("http://localhost:3001/api/teacher", {
-        name,
-        employeeId,
-        email,
-        dob,
-        gender,
-        designation,
-        mobile,
+      .put("http://localhost:3001/api/student/" + id, {
+        name: name,
+        regNo: reg,
+        email: email,
+        dob: date,
+        gender: gender,
+        standard: standard,
+        rollNo: roll,
+        mobileNo: mob,
       })
       .then((res) => {
         console.log(res);
@@ -51,9 +76,9 @@ function AddTeacher() {
       .catch((err) => {
         console.log(err);
       });
-    history.push("/teacher");
+    history.push("/student");
     M.toast({
-      html: "Teacher Added Successfully!!",
+      html: "Student Updated Successfully!!",
       classes: "#00bcd4 cyan",
     });
   };
@@ -61,7 +86,7 @@ function AddTeacher() {
     <div>
       <div className="add-card">
         <div className="card add-card-child">
-          <h5>Fill Data</h5>
+          <h5>Edit Data</h5>
           <input
             type="text"
             placeholder="Full Name"
@@ -70,13 +95,13 @@ function AddTeacher() {
           ></input>
           <input
             type="text"
-            placeholder="Employee Id"
-            value={employeeId}
-            onChange={(e) => setEmployeeId(e.target.value)}
+            placeholder="Registration Number"
+            value={reg}
+            onChange={(e) => setReg(e.target.value)}
           ></input>
           <input
             type="text"
-            placeholder="Email Id"
+            placeholder="Email id"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></input>
@@ -88,9 +113,9 @@ function AddTeacher() {
               label="Date of Birth"
               type="date"
               defaultValue="2020-11-16"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
               className={classes.textField}
-              value={dob}
-              onChange={(e) => setDob(e.target.value)}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -112,22 +137,28 @@ function AddTeacher() {
             <FormControlLabel value="other" control={<Radio />} label="Other" />
           </RadioGroup>
           <input
-            type="text"
-            placeholder="Designation"
-            value={designation}
-            onChange={(e) => setDesignation(e.target.value)}
+            type="number"
+            placeholder="Standard"
+            value={standard}
+            onChange={(e) => setStandard(e.target.value)}
+          ></input>
+          <input
+            type="number"
+            placeholder="Roll No"
+            value={roll}
+            onChange={(e) => setRoll(e.target.value)}
           ></input>
           <input
             type="text"
-            placeholder="Mobile No."
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
+            placeholder="Mobile No"
+            value={mob}
+            onChange={(e) => setMob(e.target.value)}
           ></input>
           <button
             className="waves-effect waves-light btn"
             onClick={(e) => submitForm(e)}
           >
-            Add Teacher
+            Update Student
           </button>
         </div>
       </div>
@@ -135,4 +166,4 @@ function AddTeacher() {
   );
 }
 
-export default AddTeacher;
+export default UpdateStudent;

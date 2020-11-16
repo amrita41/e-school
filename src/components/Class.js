@@ -1,10 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import Filter1Icon from "@material-ui/icons/Filter1";
 
 function Class() {
   const history = useHistory();
+  const handleStudentClick = (cls) => {
+    history.push("/students-class/" + cls);
+  };
+  const handleSubjectClick = (cls) => {
+    history.push("/subjects-class/" + cls);
+  };
+
   return (
     <div>
       <nav>
@@ -14,198 +19,219 @@ function Class() {
           </a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
-              <a href="/add-class">Add new class</a>
+              <a href="/add-subject">Add new Subject</a>
             </li>
+            {/* <li>
+              <a href="/add-class">Add new class</a>
+            </li> */}
             <li>
               <a href="/admin">Back</a>
             </li>
           </ul>
         </div>
       </nav>
-      <div className="flex-container">
-        <div className="card class-card">
+
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 01</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class01")}
+            onClick={() => handleStudentClick(1)}
           >
             List of Students enrolled in this class
           </button>
-
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class01")}
+            onClick={() => handleSubjectClick(1)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
+      </div>
+
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 02</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class02")}
+            onClick={() => handleStudentClick(2)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class02")}
+            onClick={() => handleSubjectClick(2)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
+      </div>
+
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 03</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class03")}
+            onClick={() => handleStudentClick(3)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class03")}
+            onClick={() => handleSubjectClick(3)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
+      </div>
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 04</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class04")}
+            onClick={() => handleStudentClick(4)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class04")}
+            onClick={() => handleSubjectClick(4)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
+      </div>
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 05</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class05")}
+            onClick={() => handleStudentClick(5)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class05")}
+            onClick={() => handleSubjectClick(5)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
+      </div>
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 06</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class06")}
+            onClick={() => handleStudentClick(6)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class06")}
+            onClick={() => handleSubjectClick(6)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
-          {" "}
+      </div>
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 07</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class07")}
+            onClick={() => handleStudentClick(7)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class07")}
+            onClick={() => handleSubjectClick(7)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
-          {" "}
+      </div>
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 08</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class08")}
+            onClick={() => handleStudentClick(8)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class08")}
+            onClick={() => handleSubjectClick(8)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
-          {" "}
+      </div>
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 09</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class09")}
+            onClick={() => handleStudentClick(9)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class09")}
+            onClick={() => handleSubjectClick(9)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
-          {" "}
+      </div>
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 10</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class10")}
+            onClick={() => handleStudentClick(10)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class10")}
+            onClick={() => handleSubjectClick(10)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
-          {" "}
+      </div>
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 11</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class11")}
+            onClick={() => handleStudentClick(11)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class11")}
+            onClick={() => handleSubjectClick(11)}
           >
             List of Subjects taught in this class
           </button>
         </div>
-        <div className="card class-card">
-          {" "}
+      </div>
+      <div className="mycard">
+        <div className="card auth-card">
           <p>Class: 12</p>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/students-class12")}
+            onClick={() => handleStudentClick(12)}
           >
             List of Students enrolled in this class
           </button>
           <button
             className="waves-effect waves-light btn button-class"
-            onClick={() => history.push("/subjects-class12")}
+            onClick={() => handleSubjectClick(12)}
           >
             List of Subjects taught in this class
           </button>

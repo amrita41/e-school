@@ -12,8 +12,21 @@ import Class from "./components/Class";
 import AddStudent from "./components/AddStudent";
 import AddTeacher from "./components/AddTeacher";
 import AddClass from "./components/AddClass";
-import Class1 from "./components/subjects/Class1";
 import AddSubject from "./components/AddSubject";
+import UpdateStudent from "./components/UpdateStudent";
+import UpdateTeacher from "./components/UpdateTeacher";
+import ClassStudents from "./components/ClassStudents";
+import ClassSubjects from "./components/ClassSubjects";
+import StudentHome from "./student/StudentHome";
+import StudentMarks from "./student/StudentMarks";
+import StudentSubject from "./student/StudentSubject";
+import StudentAttendance from "./student/StudentAttendance";
+import SubHw from "./student/SubHw";
+import SubExtra from "./student/SubExtra";
+import SubQuiz from "./student/SubQuiz";
+import SubGeneral from "./student/SubGeneral";
+import TeacherHome from "./teacher/TeacherHome";
+import SubjectAction from "./teacher/SubjectAction";
 
 const routing = (
   <BrowserRouter>
@@ -44,11 +57,51 @@ const routing = (
     <Route path="/add-class">
       <AddClass />
     </Route>
-    <Route path="/subjects-class01">
-      <Class1 />
+    <Route path="/students-class/:classNo">
+      <ClassStudents />
+    </Route>
+    <Route path="/subjects-class/:classNo">
+      <ClassSubjects />
+    </Route>
+    <Route path="/edit-student/:id">
+      <UpdateStudent />
+    </Route>
+    <Route path="/edit-teacher/:id">
+      <UpdateTeacher />
     </Route>
     <Route path="/add-subject">
       <AddSubject />
+    </Route>
+    <Route path="/student-home/:userName">
+      <StudentHome />
+    </Route>
+    <Route path="/:userName/marks">
+      <StudentMarks />
+    </Route>
+    <Route path="/:userName/attendance">
+      <StudentAttendance />
+    </Route>
+    <Route path="/:userName/subjects">
+      <StudentSubject />
+    </Route>
+    {/* history.push("/" + subName + "/" + res + "/general"); */}
+    <Route path="/:subName/:classNo/general">
+      <SubGeneral />
+    </Route>
+    <Route path="/:subName/:classNo/quiz">
+      <SubQuiz />
+    </Route>
+    <Route path="/:subName/:classNo/hw">
+      <SubHw />
+    </Route>
+    <Route path="/:subName/:classNo/extra">
+      <SubExtra />
+    </Route>
+    <Route path="/teacher-home/:employeeId">
+      <TeacherHome />
+    </Route>
+    <Route path="/action/:subName/:classNo">
+      <SubjectAction />
     </Route>
   </BrowserRouter>
 );

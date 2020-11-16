@@ -1,4 +1,4 @@
-import React, { useState, useEfect } from "react";
+import React, { useState, useEffect } from "react";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import M from "materialize-css";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,9 +23,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddTeacher() {
+function UpdateTeacher() {
   const history = useHistory();
   const classes = useStyles();
+  const { id } = useParams();
   const [name, setName] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [email, setEmail] = useState("");
@@ -32,11 +34,32 @@ function AddTeacher() {
   const [gender, setGender] = useState("");
   const [designation, setDesignation] = useState("");
   const [mobile, setMobile] = useState("");
+
+  useEffect(() => {
+    getTeacherById();
+  }, []);
+
+  const getTeacherById = () => {
+    axios
+      .get("http://localhost:3001/api/teacher/" + id)
+      .then((res) => {
+        setName(res.data.name);
+        setEmployeeId(res.data.regNo);
+        setEmail(res.data.email);
+        setGender(res.data.gender);
+        setDesignation(res.data.designation);
+        setMobile(res.data.mobile);
+        setDob(res.data.dob);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
-    e.preventDefault();
     axios
-      .post("http://localhost:3001/api/teacher", {
+      .put("http://localhost:3001/api/teacher/" + id, {
         name,
         employeeId,
         email,
@@ -53,7 +76,7 @@ function AddTeacher() {
       });
     history.push("/teacher");
     M.toast({
-      html: "Teacher Added Successfully!!",
+      html: "Teacher Updated Successfully!!",
       classes: "#00bcd4 cyan",
     });
   };
@@ -127,7 +150,7 @@ function AddTeacher() {
             className="waves-effect waves-light btn"
             onClick={(e) => submitForm(e)}
           >
-            Add Teacher
+            Update Teacher
           </button>
         </div>
       </div>
@@ -135,4 +158,4 @@ function AddTeacher() {
   );
 }
 
-export default AddTeacher;
+export default UpdateTeacher;
