@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import SetPassword from "./components/SetPassword";
 import Admin from "./components/Admin";
 import Student from "./components/Student";
+import Subject from "./components/Subject";
 import Teacher from "./components/Teacher";
 import Class from "./components/Class";
 import AddStudent from "./components/AddStudent";
@@ -27,6 +28,8 @@ import SubQuiz from "./student/SubQuiz";
 import SubGeneral from "./student/SubGeneral";
 import TeacherHome from "./teacher/TeacherHome";
 import SubjectAction from "./teacher/SubjectAction";
+import SubjectPosts from "./teacher/SubjectPosts";
+import TakeAttendance from "./teacher/TakeAttendance";
 
 const routing = (
   <BrowserRouter>
@@ -38,6 +41,9 @@ const routing = (
     </Route>
     <Route path="/admin">
       <Admin />
+    </Route>
+    <Route path="/subject">
+      <Subject />
     </Route>
     <Route path="/student">
       <Student />
@@ -102,6 +108,12 @@ const routing = (
     </Route>
     <Route path="/action/:subName/:classNo">
       <SubjectAction />
+    </Route>
+    <Route path="/attendance/:subName/:classNo">
+      <TakeAttendance />
+    </Route>
+    <Route path="/:subName/:classNo/posts">
+      <SubjectPosts />
     </Route>
   </BrowserRouter>
 );

@@ -62,6 +62,7 @@ function StudentSubject(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [list, setList] = useState([]);
+  const [announcement, setAnnouncement] = useState([]);
   const res = userName.split("-")[1];
   useEffect(() => {
     axios
@@ -69,6 +70,15 @@ function StudentSubject(props) {
       .then((res) => {
         console.log(res);
         setList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios
+      .get("http://localhost:3001/api/announcement")
+      .then((res) => {
+        console.log(res);
+        setAnnouncement(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -121,12 +131,7 @@ function StudentSubject(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap className="header">
-            {/* <button className="header-button">General</button>
-            <button className="header-button">Homeworks</button>
-            <button className="header-button">Quizzes</button>
-            <button className="header-button">Miscellaneous</button> */}
-          </Typography>
+          <Typography variant="h6" noWrap className="header"></Typography>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -162,7 +167,29 @@ function StudentSubject(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        All announcements will go here..
+        <div className="mycard">
+          <div className="card auth-card-announcement">
+            <h6>All announcements goes here..</h6>
+            <hr />
+            <br />
+            <br />
+            {announcement.map(
+              (row) =>
+                row.standard == res && (
+                  <div>
+                    <h6>Subject: {row.subject}</h6>
+                    <h6>Title: {row.title}</h6>
+                    <h6>Description: {row.description}</h6>
+                    <h6>Posted by: {row.teacher}</h6>
+                    <h6>Posted at: {row.time}</h6>
+                    <hr />
+                    <br />
+                    <br />
+                  </div>
+                )
+            )}
+          </div>
+        </div>
       </main>
     </div>
   );

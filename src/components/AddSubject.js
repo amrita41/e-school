@@ -22,7 +22,7 @@ function AddSubject() {
       .catch((err) => {
         console.log(err);
       });
-    history.push("/class");
+    history.push("/subject");
     M.toast({
       html: "Subject Added Successfully!!",
       classes: "#00bcd4 cyan",

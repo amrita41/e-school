@@ -81,8 +81,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function StudentHome() {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+  );
+  // "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+  const [url, setUrl] = useState("");
   const [list, setList] = useState([]);
+  // const [imageList, setImageList] = useState([]);
   const classes = useStyles();
   const theme = useTheme();
   const history = useHistory();
@@ -92,6 +97,7 @@ export default function StudentHome() {
   const classNo = res[1];
   const rollNo = res[2];
   const name = res[0];
+  // const [id, setId] = useState("");
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/student")
@@ -102,7 +108,27 @@ export default function StudentHome() {
       .catch((err) => {
         console.log(err);
       });
+
+    // axios
+    //   .get("http://localhost:3001/api/image")
+    //   .then((res) => {
+    //     console.log(res);
+    //     setImageList(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, []);
+
+  // useEffect(() => {
+  //   imageList.map(
+  //     (row) =>
+  //       row.std == classNo &&
+  //       row.roll == rollNo &&
+  //       setImage(row.url) &&
+  //       setId(row._id)
+  //   );
+  // });
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -126,6 +152,46 @@ export default function StudentHome() {
     } else if (text == "Home") {
       history.push("/student-home/" + userName + "/");
     }
+  };
+
+  const uploadImage = (e) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "amrita_ems");
+    data.append("cloud_name", "amritaems");
+    fetch("https://api.cloudinary.com/v1_1/amritaems/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => setUrl(data.url))
+      .catch((err) => console.log(err));
+
+    axios
+      .post("http://localhost:3001/api/image", {
+        roll: rollNo,
+        std: classNo,
+        url: url,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // axios
+    // .put("http://localhost:3001/api/image/" + id, {
+    //   roll: rollNo,
+    //   std: classNo,
+    //   url: url,
+    // })
+    // .then((res) => {
+    //   console.log(res);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
   };
 
   return (
@@ -194,9 +260,23 @@ export default function StudentHome() {
         <div className="add-card">
           <div className="card add-card-child">
             <img
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              // src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              src={image}
               className="profile-image"
             />
+            <input
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+              // onChange={(e) => uploadImage(e)}
+            ></input>
+            <br />
+            <br />
+            <button
+              className="waves-effect waves-light btn #283593 indigo darken-3"
+              onClick={() => uploadImage()}
+            >
+              Upload Image
+            </button>
             <br />
             <br />
             <hr />
@@ -209,9 +289,11 @@ export default function StudentHome() {
                   <div>
                     <p>Name: {row.name}</p>
 
-                    <p>Class: {row.standard}</p>
+                    <p>
+                      Class: {row.standard}, Roll No.: {row.rollNo}
+                    </p>
 
-                    <p>Roll No.: {row.rollNo}</p>
+                    <p>Gender: {row.gender}</p>
 
                     <p>Email: {row.email}</p>
 

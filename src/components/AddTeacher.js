@@ -56,6 +56,7 @@ function AddTeacher() {
       html: "Teacher Added Successfully!!",
       classes: "#00bcd4 cyan",
     });
+    window.location.reload(false);
   };
   return (
     <div>

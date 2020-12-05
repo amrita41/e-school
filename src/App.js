@@ -8,6 +8,7 @@ function App() {
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
   const [list, setList] = useState([]);
+  const [teacher, setTeacher] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -16,6 +17,15 @@ function App() {
       .then((res) => {
         console.log(res);
         setList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios
+      .get("http://localhost:3001/api/teacher")
+      .then((res) => {
+        console.log(res);
+        setTeacher(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -33,6 +43,14 @@ function App() {
           history.push("/student-home/" + name)
       );
     }
+    {
+      teacher.map(
+        (row) =>
+          name == row.employeeId &&
+          pass == row.employeeId &&
+          history.push("/teacher-home/" + name)
+      );
+    }
     if (name == "" || pass == "") {
       M.toast({
         html: "Please fill all the details",
@@ -42,12 +60,6 @@ function App() {
       history.push("/admin");
       M.toast({
         html: "Login successful as an admin!!",
-        classes: "#00bcd4 cyan",
-      });
-    } else if (name == "123456" && pass == "123456") {
-      history.push("/teacher-home/" + name);
-      M.toast({
-        html: "Login successful as a teacher!!",
         classes: "#00bcd4 cyan",
       });
     }

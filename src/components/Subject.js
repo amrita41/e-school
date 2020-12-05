@@ -33,18 +33,18 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles({
   paper: {
-    width: 1200,
-    marginLeft: 70,
+    width: 900,
+    marginLeft: 220,
   },
 });
 
-function Student() {
+function Subject() {
   const classes = useStyles();
   const [list, setList] = useState([]);
   const history = useHistory();
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/student")
+      .get("http://localhost:3001/api/subject")
       .then((res) => {
         console.log(res);
         setList(res.data);
@@ -57,7 +57,7 @@ function Student() {
 
   const handleDelete = (_id) => {
     axios
-      .delete("http://localhost:3001/api/student/" + _id)
+      .delete("http://localhost:3001/api/subject/" + _id)
       .then((res) => {
         console.log(res);
       })
@@ -71,22 +71,19 @@ function Student() {
     });
   };
 
-  const handleUpdate = (id) => {
-    history.push("/edit-student/" + id);
-  };
   return (
     <div>
       <nav>
         <div className="nav-wrapper #000000 black">
           <a href="#" className="brand-logo" style={{ fontSize: "20px" }}>
-            List of Students
+            List of Subjects
           </a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
-              <a href="/add-student">Add new Student</a>
+              <a href="/add-subject">Add new Subject</a>
             </li>
             <li>
-              <a href="/admin">Back</a>
+              <a href="/class">Back</a>
             </li>
           </ul>
         </div>
@@ -97,39 +94,20 @@ function Student() {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Admission No.</StyledTableCell>
-              <StyledTableCell align="right">Name</StyledTableCell>
+              <StyledTableCell>Subject Name</StyledTableCell>
               <StyledTableCell align="right">Class</StyledTableCell>
-              <StyledTableCell align="right">Roll No.</StyledTableCell>
-              <StyledTableCell align="right">Gender</StyledTableCell>
-              <StyledTableCell align="right">Date of Birth</StyledTableCell>
-              <StyledTableCell align="right">Email Id.</StyledTableCell>
-              <StyledTableCell align="right">Mobile No.</StyledTableCell>
-              <StyledTableCell align="right">Edit</StyledTableCell>
+              <StyledTableCell align="right">Teacher's Name</StyledTableCell>
               <StyledTableCell align="right">Delete</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {list.map((row) => (
-              <StyledTableRow key={row.email}>
+              <StyledTableRow key={row._id}>
                 <StyledTableCell component="th" scope="row">
-                  {row.regNo}
+                  {row.name}
                 </StyledTableCell>
-                <StyledTableCell align="right">{row.name}</StyledTableCell>
                 <StyledTableCell align="right">{row.standard}</StyledTableCell>
-                <StyledTableCell align="right">{row.rollNo}</StyledTableCell>
-                <StyledTableCell align="right">{row.gender}</StyledTableCell>
-                <StyledTableCell align="right">{row.dob}</StyledTableCell>
-                <StyledTableCell align="right">{row.email}</StyledTableCell>
-                <StyledTableCell align="right">{row.mobileNo}</StyledTableCell>
-                <StyledTableCell align="right">
-                  <button
-                    onClick={() => handleUpdate(row._id)}
-                    style={{ color: "green" }}
-                  >
-                    <EditIcon />
-                  </button>
-                </StyledTableCell>
+                <StyledTableCell align="right">{row.teacher}</StyledTableCell>
                 <StyledTableCell align="right">
                   <button
                     onClick={() => handleDelete(row._id)}
@@ -147,4 +125,4 @@ function Student() {
   );
 }
 
-export default Student;
+export default Subject;

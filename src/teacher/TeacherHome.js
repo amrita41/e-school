@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  paper: {
+    width: 600,
+    marginLeft: 400,
+  },
 }));
 
 export default function TeacherHome() {
@@ -69,6 +73,7 @@ export default function TeacherHome() {
           <Typography variant="h6" className={classes.title}>
             Welcome, {name}
           </Typography>
+
           <Button color="inherit" onClick={() => history.push("/")}>
             Logout
           </Button>
@@ -79,42 +84,39 @@ export default function TeacherHome() {
       </h5>
       <br />
       <br />
-      <div className="mycard">
-        <div className="card auth-card">
-          <TableContainer component={Paper} className={classes.paper}>
-            <Table className={classes.table} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Subject Name</TableCell>
-                  <TableCell align="right">Class</TableCell>
-                  <TableCell align="right">Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {sub.map(
-                  (row) =>
-                    row.teacher == name && (
-                      <TableRow key={row.name}>
-                        <TableCell component="th" scope="row">
-                          {row.name}
-                        </TableCell>
-                        <TableCell align="right">{row.standard}</TableCell>
-                        <TableCell align="right">
-                          <button
-                            className="waves-effect waves-light btn #4527a0 deep-purple darken-2"
-                            onClick={() => handleClick(row.name, row.standard)}
-                          >
-                            Move
-                          </button>
-                        </TableCell>
-                      </TableRow>
-                    )
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-      </div>
+
+      <TableContainer component={Paper} className={classes.paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Subject Name</TableCell>
+              <TableCell align="right">Class</TableCell>
+              <TableCell align="right">Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sub.map(
+              (row) =>
+                row.teacher == name && (
+                  <TableRow key={row.name}>
+                    <TableCell component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell align="right">{row.standard}</TableCell>
+                    <TableCell align="right">
+                      <button
+                        className="waves-effect waves-light btn #4527a0 deep-purple darken-2"
+                        onClick={() => handleClick(row.name, row.standard)}
+                      >
+                        Go
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                )
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

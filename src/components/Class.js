@@ -19,8 +19,11 @@ function Class() {
           </a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
-              <a href="/add-subject">Add new Subject</a>
+              <a href="/subject">All Subjects</a>
             </li>
+            {/* <li>
+              <a href="/add-subject">Assign subjects to teachers</a>
+            </li> */}
             {/* <li>
               <a href="/add-class">Add new class</a>
             </li> */}

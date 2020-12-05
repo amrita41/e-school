@@ -153,6 +153,9 @@ function StudentSubject(props) {
             >
               Miscellaneous
             </button>
+            <button className="header-button" onClick={() => history.push("/")}>
+              Back
+            </button>
           </Typography>
         </Toolbar>
       </AppBar>

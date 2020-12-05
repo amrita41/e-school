@@ -79,6 +79,7 @@ function UpdateTeacher() {
       html: "Teacher Updated Successfully!!",
       classes: "#00bcd4 cyan",
     });
+    window.location.reload(false);
   };
   return (
     <div>

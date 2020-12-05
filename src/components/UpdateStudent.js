@@ -81,6 +81,7 @@ function UpdateStudent() {
       html: "Student Updated Successfully!!",
       classes: "#00bcd4 cyan",
     });
+    window.location.reload(false);
   };
   return (
     <div>
@@ -95,7 +96,7 @@ function UpdateStudent() {
           ></input>
           <input
             type="text"
-            placeholder="Registration Number"
+            placeholder="Admission Number"
             value={reg}
             onChange={(e) => setReg(e.target.value)}
           ></input>
@@ -138,7 +139,7 @@ function UpdateStudent() {
           </RadioGroup>
           <input
             type="number"
-            placeholder="Standard"
+            placeholder="Class"
             value={standard}
             onChange={(e) => setStandard(e.target.value)}
           ></input>

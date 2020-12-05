@@ -56,6 +56,7 @@ function AddStudent() {
       html: "Student Added Successfully!!",
       classes: "#00bcd4 cyan",
     });
+    window.location.reload(false);
   };
   return (
     <div>
@@ -70,7 +71,7 @@ function AddStudent() {
           ></input>
           <input
             type="text"
-            placeholder="Registration Number"
+            placeholder="Admission Number"
             value={reg}
             onChange={(e) => setReg(e.target.value)}
           ></input>
@@ -113,7 +114,7 @@ function AddStudent() {
           </RadioGroup>
           <input
             type="number"
-            placeholder="Standard"
+            placeholder="Class"
             value={standard}
             onChange={(e) => setStandard(e.target.value)}
           ></input>

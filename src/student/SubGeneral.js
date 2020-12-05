@@ -62,12 +62,22 @@ function StudentSubject(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [list, setList] = useState([]);
+  const [announcement, setAnnouncement] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/subject")
       .then((res) => {
         console.log(res);
         setList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios
+      .get("http://localhost:3001/api/announcement")
+      .then((res) => {
+        console.log(res);
+        setAnnouncement(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -153,6 +163,10 @@ function StudentSubject(props) {
             >
               Miscellaneous
             </button>
+
+            <button className="header-button" onClick={() => history.push("/")}>
+              Back
+            </button>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -189,6 +203,30 @@ function StudentSubject(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <div className="mycard">
+          <div className="card auth-card-announcement">
+            <h6>All announcements goes here..</h6>
+            <hr />
+            <br />
+            <br />
+            {announcement.map(
+              (row) =>
+                row.standard == classNo &&
+                row.subject == subName && (
+                  <div>
+                    <h6>Subject: {row.subject}</h6>
+                    <h6>Title: {row.title}</h6>
+                    <h6>Description: {row.description}</h6>
+                    <h6>Posted by: {row.teacher}</h6>
+                    <h6>Posted at: {row.time}</h6>
+                    <hr />
+                    <br />
+                    <br />
+                  </div>
+                )
+            )}
+          </div>
+        </div>
       </main>
     </div>
   );
